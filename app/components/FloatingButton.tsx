@@ -7,12 +7,17 @@ import { set } from 'date-fns'
 //import Animated from 'react-native-reanimated'
 
 type Props = {
-    onPress: () => void
-    onGroupPress: () => void
+    onMicroProspectPress: () => void
+    onGroupProspectPress: () => void
+    onNewProspect: () => void
     style?: any
 }
 
-const FloatingButton = ({ style, onPress, onGroupPress }: Props) => {
+const FloatingButton = ({
+    onMicroProspectPress: onMicroPress,
+    onGroupProspectPress: onGroupPress,
+    onNewProspect: onFormalPress,
+}: Props) => {
     const animation = new Animated.Value(0)
     const [btn_1] = React.useState(new Animated.Value(40))
     const [btn_2] = React.useState(new Animated.Value(40))
@@ -59,44 +64,17 @@ const FloatingButton = ({ style, onPress, onGroupPress }: Props) => {
         }).start()
     }
 
-    const toggleMenu = () => {
-        //const toValue = open ? 0 : 1
-        //Animated.spring(animation, {
-        //    toValue,
-        //    friction: 5,
-        //    useNativeDriver: true,
-        //}).start()
-        //setOpen(!open)
-        console.log('open', open)
-    }
-    ////const animation = useAnimation
-
     const rotate = animation.interpolate({
         inputRange: [0, 1],
         outputRange: ['0deg', '45deg'],
     })
-
-    const pinStyle = {
-        transform: [
-            {
-                scale: animation,
-            },
-            {
-                translateY: animation.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, -70],
-                }),
-            },
-        ],
-    }
-    console.log('open', open)
 
     return (
         <View style={{}}>
             <Animated.View
                 style={[styles.button, styles.secondary, { bottom: btn_1 }]}
             >
-                <TouchableWithoutFeedback onPress={onPress}>
+                <TouchableWithoutFeedback onPress={onMicroPress}>
                     <AntDesign name="addusergroup" size={24} color="white" />
                 </TouchableWithoutFeedback>
             </Animated.View>
@@ -109,11 +87,8 @@ const FloatingButton = ({ style, onPress, onGroupPress }: Props) => {
             >
                 <TouchableWithoutFeedback
                     onPress={() => {
+                        onGroupPress()
                         setOpen(false)
-                        setTimeout(() => {
-                            onGroupPress()
-                        }, 1000)
-                        //    onGroupPress()
                     }}
                 >
                     {/*<AntDesign name="bars" size={24} color="white" />*/}
@@ -127,7 +102,7 @@ const FloatingButton = ({ style, onPress, onGroupPress }: Props) => {
             <Animated.View
                 style={[styles.button, styles.secondary, { right: btn_3 }]}
             >
-                <TouchableWithoutFeedback onPress={onPress}>
+                <TouchableWithoutFeedback onPress={onFormalPress}>
                     <AntDesign name="adduser" size={24} color="white" />
                 </TouchableWithoutFeedback>
             </Animated.View>

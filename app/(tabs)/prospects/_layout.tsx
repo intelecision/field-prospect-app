@@ -7,9 +7,9 @@ export default function ProspectStackLayout() {
         <Stack
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: 'crimson',
+                    backgroundColor: '#fff',
                 },
-                headerTintColor: '#fff',
+                //headerTintColor: '#fff',
             }}
         >
             <Stack.Screen

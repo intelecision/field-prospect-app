@@ -7,7 +7,7 @@ export default function MicroStackLayout() {
         <Stack
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: 'crimson',
+                    backgroundColor: '#78909c',
                 },
                 headerTintColor: '#fff',
                 headerShown: false,

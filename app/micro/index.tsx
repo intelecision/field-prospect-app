@@ -15,7 +15,7 @@ const IndexScreen = () => {
         <View style={styles.container}>
             <MicroScreen
                 heading="Introduction"
-                onCancel={() => navigation.navigate('home')}
+                onCancel={() => router.push('/(tabs)')}
             >
                 <ScrollView style={styles.container}>
                     <View style={styles.content}>

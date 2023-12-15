@@ -11,7 +11,7 @@ const PaymentMandate = () => {
         <>
             <Screen
                 heading="Payment Mandate"
-                handleCancel={() => router.push('/(start)')}
+                handleCancel={() => router.push('/(tabs)')}
             >
                 <View style={styles.content}>
                     <View style={styles.paragraph}>

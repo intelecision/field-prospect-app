@@ -185,7 +185,7 @@ export interface Address {
     country: string
 }
 
-export interface ClientInformation {
+export interface CustomerInformation {
     title: string
     firstName: string
     middleName: string
@@ -202,6 +202,7 @@ export interface ClientInformation {
     occupation: string
     email: string
     contactPhone: string
+    country?: string
 }
 
 export interface BeneficiaryInformation extends Address {

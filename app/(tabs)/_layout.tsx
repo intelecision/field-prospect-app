@@ -3,6 +3,7 @@ import { Link, Tabs } from 'expo-router'
 import { Pressable, View, useColorScheme } from 'react-native'
 import { AntDesign, Entypo, Feather, Ionicons } from '@expo/vector-icons'
 import Colors from '../../constants/Colors'
+import { he } from 'date-fns/locale'
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -11,28 +12,28 @@ function TabBarIcon(props: {
     name: React.ComponentProps<typeof FontAwesome>['name']
     color: string
 }) {
-    return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />
+    return <FontAwesome size={22} style={{ marginBottom: -3 }} {...props} />
 }
 
 function TabBarIonicons(props: {
     name: React.ComponentProps<typeof Ionicons>['name']
     color: string
 }) {
-    return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />
+    return <Ionicons size={22} style={{ marginBottom: -3 }} {...props} />
 }
 
 function TabBarAnteDesignIcon(props: {
     name: React.ComponentProps<typeof AntDesign>['name']
     color: string
 }) {
-    return <AntDesign size={28} style={{ marginBottom: -3 }} {...props} />
+    return <AntDesign size={22} style={{ marginBottom: -3 }} {...props} />
 }
 
 function TabBarEntypoIcon(props: {
     name: React.ComponentProps<typeof Entypo>['name']
     color: string
 }) {
-    return <Entypo size={28} style={{ marginBottom: -3 }} {...props} />
+    return <Entypo size={22} style={{ marginBottom: -3 }} {...props} />
 }
 
 export default function TabLayout() {
@@ -42,18 +43,20 @@ export default function TabLayout() {
         <Tabs
             screenOptions={{
                 headerShown: false,
-                headerBackground: () => (
-                    <View
-                        style={{
-                            backgroundColor:
-                                Colors[colorScheme ?? 'light'].tint,
-                            flex: 1,
-                        }}
-                    />
-                ),
+                //headerBackground: () => (
+                //    <View
+                //        style={{
+                //            backgroundColor:
+                //                Colors[colorScheme ?? 'light'].tint,
+                //            flex: 1,
+                //        }}
+                //    />
+                //),
                 headerStyle: {
-                    backgroundColor: 'crimson',
+                    backgroundColor: '#fff',
+                    height: 120,
                 },
+                headerTintColor: '#00A3AD',
                 tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
                 tabBarInactiveTintColor:
                     Colors[colorScheme ?? 'light'].tabIconDefault,
@@ -65,6 +68,7 @@ export default function TabLayout() {
                     tabBarIcon: ({ color }) => (
                         <TabBarIcon name="dashboard" color={color} />
                     ),
+                    title: 'Dashboard',
                 }}
             />
 
@@ -74,7 +78,7 @@ export default function TabLayout() {
                     title: 'Prospects',
                     headerShown: false,
                     tabBarIcon: ({ color }) => (
-                        <Feather name="target" size={24} color={color} />
+                        <Feather name="target" size={22} color={color} />
                         //<TabBarAnteDesignIcon name="carryout" color={color} />
                     ),
                 }}

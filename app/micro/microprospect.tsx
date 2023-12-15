@@ -20,7 +20,7 @@ import {
     YesNoRadioGroup,
     YesNoRadioGroupState,
 } from '../components/YesNoRadioGroup'
-import AddressSection from './components/AddressSection'
+import AddressSection from '../components/AddressSection'
 import ContentIndex from './components/ContentIndex'
 import NavigationBar from '../../components/NavigationBar'
 
@@ -72,12 +72,11 @@ const contentSteps = [
 ]
 
 const MicroProspectPage = () => {
-    const navigation = useNavigation()
     return (
         <>
             <MicroScreen
-                heading="Micro Prospect"
-                onCancel={() => navigation.navigate('home')}
+                heading="Application content"
+                onCancel={() => router.push('/(tabs)')}
             >
                 <ScrollView style={styles.content}>
                     <ContentIndex content={contentSteps} />

@@ -1,8 +1,9 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Text } from '../../../components/Themed'
 import { ScrollView } from 'react-native-gesture-handler'
 import { Entypo, Ionicons } from '@expo/vector-icons'
+import { Link, router } from 'expo-router'
 
 const MoreScreen = () => {
     return (
@@ -32,28 +33,42 @@ const MoreScreen = () => {
                             HELP & SUPPORT
                         </Text>
                     </View>
-
+                    {/*<Link href="/(tabs)/lifeInsurance" asChild>
+                        <Text style={styles.link}> Find out more</Text>
+                    </Link>*/}
                     <View style={styles.section}>
-                        <View style={styles.sectionContent}>
-                            <Ionicons
-                                name="help-circle-outline"
-                                size={30}
-                                color="black"
-                            />
-                            <Text style={styles.sectionContentText}>
-                                Frequently Asked Questions (FAQs)
-                            </Text>
-                        </View>
-                        <View style={styles.sectionContent}>
-                            <Ionicons
-                                name="ios-library-outline"
-                                size={30}
-                                color="black"
-                            />
-                            <Text style={styles.sectionContentText}>
-                                Knowledge base
-                            </Text>
-                        </View>
+                        <TouchableOpacity
+                            style={styles.sectionContent}
+                            onPress={() => router.push('/(tabs)/more/faq')}
+                        >
+                            <View style={styles.sectionContent}>
+                                <Ionicons
+                                    name="help-circle-outline"
+                                    size={30}
+                                    color="black"
+                                />
+                                <Text style={styles.sectionContentText}>
+                                    Frequently Asked Questions (FAQs)
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.sectionContent}
+                            onPress={() =>
+                                router.push('/(tabs)/more/knowledgeBase')
+                            }
+                        >
+                            <View style={styles.sectionContent}>
+                                <Ionicons
+                                    name="ios-library-outline"
+                                    size={30}
+                                    color="black"
+                                />
+                                <Text style={styles.sectionContentText}>
+                                    Knowledge base
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
                         <View style={styles.sectionContent}>
                             <Entypo name="ticket" size={30} color="black" />
                             <Text style={styles.sectionContentText}>

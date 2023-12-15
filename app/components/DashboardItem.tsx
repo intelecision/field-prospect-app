@@ -22,14 +22,17 @@ export default DashboardItem
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        minHeight: 250,
+        width: '100%',
+        minHeight: 200,
         backgroundColor: '#fff',
         padding: 20,
+        paddingTop: 10,
         marginBottom: 10,
         borderRadius: 10,
     },
     content: {
         flex: 1,
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
     },

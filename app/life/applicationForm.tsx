@@ -8,7 +8,7 @@ const ApplicationForm = () => {
     return (
         <Screen
             heading="Application Form"
-            handleCancel={() => router.push('/(start)')}
+            handleCancel={() => router.push('/(tabs)')}
         >
             <View style={styles.container}>
                 <View style={styles.container}>

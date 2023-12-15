@@ -21,7 +21,7 @@ export default function PaymentStack() {
                 name="index"
                 options={{
                     headerLeft: () => (
-                        <Link href="/(drawer)/(tabs)/home" asChild>
+                        <Link href="/(tabs)" asChild>
                             <Pressable>
                                 {({ pressed }) => (
                                     <Ionicons
@@ -45,7 +45,6 @@ export default function PaymentStack() {
                 }}
             />
             <Stack.Screen
-                name="takePayment"
                 options={{
                     headerTitle: 'Take Payment',
                     headerShown: true,

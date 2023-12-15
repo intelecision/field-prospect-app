@@ -13,6 +13,39 @@ const PaymentLayout = () => {
                 name="notifications"
                 options={{ headerShown: true, headerTitle: 'More' }}
             />
+
+            <Stack.Screen
+                name="helpcenter"
+                options={{
+                    headerTitle: 'Help Center',
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="faq"
+                options={{
+                    headerTitle: 'Help Center',
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="tickets"
+                options={{ headerTitle: 'Tickets', headerShown: false }}
+            />
+            <Stack.Screen
+                name="helpcenterdetails"
+                options={{
+                    headerTitle: 'Help Center Details',
+                    headerShown: true,
+                }}
+            />
+            <Stack.Screen
+                name="knowledgeBase"
+                options={{
+                    headerTitle: 'Knowledge Base',
+                    headerShown: false,
+                }}
+            />
         </Stack>
     )
 }

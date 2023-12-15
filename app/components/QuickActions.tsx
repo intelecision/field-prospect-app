@@ -55,9 +55,7 @@ const QuickActions = (props: Props) => {
                 </TouchableOpacity>
                 <View style={styles.iconContainer}>
                     <TouchableOpacity
-                        onPress={() =>
-                            router.push('/(drawer)/(tabs)/home/calendar')
-                        }
+                        onPress={() => router.push('/(tabs)/calendar')}
                     >
                         <View style={styles.actionItem}>
                             <Ionicons

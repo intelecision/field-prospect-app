@@ -5,9 +5,9 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { globalStyles } from '../../Styles/GlobalStyles'
 import { TextInput } from '../../../components/Themed'
-import AddressSection from './AddressSection'
+import AddressSection from '../../components/AddressSection'
 import Button from '../../../components/Button'
-import { ClientInformation } from '../../../model/entities'
+import { CustomerInformation } from '../../../model/entities'
 
 type Props = {}
 
@@ -37,7 +37,7 @@ const Beneficiary = (props: Props) => {
             middleName: Yup.string().required('Middle name is required'),
             lastName: Yup.string().required('Last name is required'),
         }),
-        onSubmit: (values: ClientInformation) => {
+        onSubmit: (values: CustomerInformation) => {
             console.log(values)
         },
     })

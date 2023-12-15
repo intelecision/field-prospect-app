@@ -9,7 +9,7 @@ const SalePitch = () => {
         <Screen
             heading={'Sales Pitch'}
             handleCancel={() => {
-                router.push('/(drawer)')
+                router.push('/(tabs)')
             }}
         >
             <ScrollView style={styles.container}>
@@ -61,7 +61,7 @@ const SalePitch = () => {
                 <Button
                     title="Next"
                     onPress={() => {
-                        router.push('/life/personaldetails')
+                        router.push('/life/readytostart')
                     }}
                 />
             </View>

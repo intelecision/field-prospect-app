@@ -19,7 +19,7 @@ import FloatingButton from '../components/FloatingButton'
 const prospect = [
     { name: 'My Prospect', value: 2, id: 1, iconName: 'md-star-outline' },
 
-    { name: 'Task', value: 2, id: 4, iconName: 'md-star-outline' },
+    { name: 'Task *****', value: 2, id: 4, iconName: 'md-star-outline' },
     { name: 'Follow ups', value: 2, id: 2, iconName: 'md-star-outline' },
     { name: 'Collection', value: 2, id: 3, iconName: 'alert-circle-outline' },
     { name: 'Help Center', value: 2, id: 5, iconName: 'md-library-outline' },

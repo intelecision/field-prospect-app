@@ -57,9 +57,19 @@ const TakePayment = (props: Props) => {
                                 {
                                     text: 'OK',
                                     onPress: () => {
-                                        //console.log('OK Pressed')
-                                        //router.push('/(drawer)/(tabs)/home')
-                                        navigation.navigate('home')
+                                        Alert.alert(
+                                            'Payment',
+                                            `You have successfully paid Ghs${amount} with ${paymentMethod.method} to ${mobileNumber}`,
+                                            [
+                                                {
+                                                    text: 'OK',
+                                                    onPress: () =>
+                                                        router.push('/(tabs)'),
+                                                },
+                                            ],
+                                            { cancelable: false }
+                                        )
+                                        router.push('/(tabs)')
                                     },
                                 },
                             ],

@@ -20,7 +20,7 @@ const handleCancel = () => {
     Alert.alert('Cancel', 'Are you sure you want to cancel?', [
         {
             text: 'Yes',
-            onPress: () => router.push('/(start)'),
+            onPress: () => router.push('/(tabs)'),
             style: 'cancel',
         },
         { text: 'No', onPress: () => console.log('OK Pressed') },
@@ -33,21 +33,22 @@ const QuestionnaireScreen: FC<Props> = (props: Props) => {
         <View style={styles.container}>
             <Stack.Screen
                 options={{
-                    headerStyle: {
-                        backgroundColor: '#ffffff',
-                    },
-                    headerTintColor: 'black',
+                    //headerStyle: {
+                    //    backgroundColor: '#ffffff',
+                    //},
+                    headerTintColor: 'white',
                     headerTitleStyle: {
                         fontWeight: 'bold',
+                        fontFamily: 'OpenSans',
                     },
                     headerTitleAlign: 'center',
-                    headerBackVisible: true,
+                    headerBackVisible: false,
                     headerBackTitleVisible: false,
                     headerRight: () => (
                         <Ionicons
                             name="close-outline"
                             size={32}
-                            color="black"
+                            color="white"
                             style={{ marginRight: 20 }}
                             onPress={handleCancel}
                         />

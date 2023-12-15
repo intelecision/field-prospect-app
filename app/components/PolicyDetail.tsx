@@ -26,7 +26,7 @@ const PolicyDetail = ({ title, narrative }: Props) => {
                         //justifyContent: 'space-between',
                     }}
                 >
-                    <Link href="/(tabs)/home/lifeInsurance" asChild>
+                    <Link href="/(tabs)/lifeInsurance" asChild>
                         <Text style={styles.link}> Find out more</Text>
                     </Link>
 

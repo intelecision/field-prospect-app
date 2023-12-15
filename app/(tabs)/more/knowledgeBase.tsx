@@ -7,11 +7,23 @@ type Props = {}
 const KnowledgeBase = (props: Props) => {
     return (
         <HelpScreen canGoBack={true} handleSubmit={() => {}}>
-            <Text>Knowledge Base</Text>
+            <View style={styles.content}>
+                <Text>Knowledge Base</Text>
+            </View>
         </HelpScreen>
     )
 }
 
 export default KnowledgeBase
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    content: {
+        flex: 1,
+        padding: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+})

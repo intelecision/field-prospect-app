@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons'
-import { Stack, Link, useNavigation } from 'expo-router'
+import { Stack, Link, useNavigation, router } from 'expo-router'
 import { FC } from 'react'
 import {
     KeyboardAvoidingView,
@@ -25,25 +25,26 @@ const Screen: FC<Props> = (props: Props) => {
         <View style={styles.container}>
             <Stack.Screen
                 options={{
-                    headerStyle: {
-                        backgroundColor: '#ffffff',
-                        //backgroundColor: '#00A3AD',
-                    },
-                    headerTintColor: 'black',
+                    //headerStyle: {
+
+                    //    backgroundColor: '#2c2c2c',
+                    //},
+                    headerTintColor: 'white',
                     headerTitleStyle: {
                         fontWeight: 'bold',
+                        fontFamily: 'OpenSans',
                     },
                     headerTitleAlign: 'center',
                     headerBackVisible: false,
                     headerBackTitleVisible: false,
 
                     headerRight: () => (
-                        <Pressable onPress={() => navigation.navigate('home')}>
+                        <Pressable onPress={() => router.push('/(tabs)')}>
                             {({ pressed }) => (
                                 <Ionicons
                                     name="close-outline"
                                     size={30}
-                                    color="#000"
+                                    color="#fff"
                                     style={{
                                         marginLeft: 15,
                                         opacity: pressed ? 0.5 : 1,
@@ -96,6 +97,6 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        //padding: 20,
+        paddingTop: 20,
     },
 })

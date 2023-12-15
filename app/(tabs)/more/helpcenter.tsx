@@ -9,12 +9,12 @@ import {
 import React, { useCallback } from 'react'
 
 import { router, useNavigation } from 'expo-router'
-import { Text } from '../../../../components/Themed'
+import { Text } from '../../../components/Themed'
 
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Entypo, MaterialIcons } from '@expo/vector-icons'
-import Colors, { colors } from '../../../../constants/Colors'
-import SearchHeader from '../../../components/SearchHeader'
+import Colors, { colors } from '../../../constants/Colors'
+import SearchHeader from '../../components/SearchHeader'
 
 type Props = {}
 

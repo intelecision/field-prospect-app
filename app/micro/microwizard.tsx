@@ -6,7 +6,7 @@ import NavigationBar from '../../components/NavigationBar'
 import PersonalInformation from './components/peronalInfomation'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { ClientInformation, HealthQuestionnaire } from '../../model/entities'
+import { CustomerInformation, HealthQuestionnaire } from '../../model/entities'
 import FinancialInformation from './components/financialInfomation'
 import MicroCoverAmount from './components/miscrocoveramount'
 import HealthStatus from '../life/components/Underwriting/HealthStatus'
@@ -86,7 +86,7 @@ const MicroWizardScreen = () => {
             email: '',
             contactPhone: '',
         },
-        onSubmit: (values: ClientInformation) => {
+        onSubmit: (values: CustomerInformation) => {
             console.log(values)
         },
         validationSchema: Yup.object({
@@ -174,7 +174,7 @@ const MicroWizardScreen = () => {
 
     const handleNext = () => {
         if (currentStep === 6) {
-            navigation.navigate('payments')
+            router.push('/(tabs)/payments/')
         }
         nextStep()
     }
@@ -223,6 +223,10 @@ const MicroWizardScreen = () => {
         }
     }
 
+    //;<Link href="/" style={styles.link}>
+    //    <Text style={styles.linkText}>Go to home screen!</Text>
+    //</Link>
+
     return (
         <MicroScreen
             heading={WizardSteps[currentStep].step}
@@ -230,13 +234,11 @@ const MicroWizardScreen = () => {
                 Alert.alert('Cancel', 'Are you sure you want to cancel?', [
                     {
                         text: 'Yes',
-                        onPress: () => navigation.navigate('home'),
+                        onPress: () => router.push('/(tabs)'),
                     },
                     {
                         text: 'No',
-                        onPress: () => {
-                            //navigation.navigate('home')
-                        },
+                        onPress: () => {},
                     },
                 ])
             }}

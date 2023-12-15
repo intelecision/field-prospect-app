@@ -3,29 +3,26 @@ import {
     Platform,
     ScrollView,
     StyleSheet,
-    TextInput,
     View,
 } from 'react-native'
-
 import React, { useEffect, useState } from 'react'
+import { FormikProps } from 'formik'
+import { CustomerInformation } from '../../../model/entities'
 import { globalStyles } from '../../Styles/GlobalStyles'
+import AddressSection from '../../components/AddressSection'
 import DateInput from '../../components/DateInput'
 import {
-    YesNoRadioGroup,
     YesNoRadioGroupState,
+    YesNoRadioGroup,
 } from '../../components/YesNoRadioGroup'
-import AddressSection from '../../components/AddressSection'
-import { FormikProps, useFormik } from 'formik'
-import * as Yup from 'yup'
-import { CustomerInformation } from '../../../model/entities'
-import { Text } from '../../../components/Themed'
+import { Text, TextInput } from '../../components/Themed'
 
 type Props = {
     formik: FormikProps<CustomerInformation>
 }
 
-const PersonalInformation = ({ formik }: Props) => {
-    const [inputHeight, setInputHeight] = React.useState(0)
+const CustomerPersonalInformation = (props: Props) => {
+    const { formik } = props
     const [dateOfBirth, setDateOfBirth] = useState<Date | string>('')
     const [isMale, setIsMale] = useState<YesNoRadioGroupState>(undefined)
 
@@ -37,7 +34,6 @@ const PersonalInformation = ({ formik }: Props) => {
     const checkIfMale = (sex: 'Male' | 'Female' | '') => {
         return formik.values.sex === 'Male' ? true : false
     }
-
     return (
         <View style={styles.container}>
             <KeyboardAvoidingView
@@ -260,7 +256,7 @@ const PersonalInformation = ({ formik }: Props) => {
     )
 }
 
-export default PersonalInformation
+export default CustomerPersonalInformation
 
 const styles = StyleSheet.create({
     container: {

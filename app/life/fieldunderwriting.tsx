@@ -15,6 +15,8 @@ import {
 } from '../../model/entities'
 import * as Yup from 'yup'
 import QuestionnaireScreen from './components/QuestionnaireScreen'
+import Screen from './components/Screen'
+import { he } from 'date-fns/locale'
 
 const FieldUnderwriting = () => {
     const {
@@ -207,15 +209,24 @@ const FieldUnderwriting = () => {
 
     return (
         <SafeAreaView style={[styles.container]}>
-            <QuestionnaireScreen
-                step={currentStep}
-                heading={headings[currentStep]}
-                numberOfSteps={2}
+            <Screen
+                heading="Your Health Status"
+                handleCancel={() => router.back()}
             >
+                {/*<QuestionnaireScreen
+                step={currentStep}
+                heading="Health Status" //{headings[currentStep]}
+                numberOfSteps={2}
+            >*/}
                 <ScrollView style={styles.content}>
-                    {handelUnderWritingSteps()}
+                    {
+                        <HealthStatus formik={healthFormik} />
+
+                        //handelUnderWritingSteps()
+                    }
                 </ScrollView>
-            </QuestionnaireScreen>
+                {/*</QuestionnaireScreen>*/}
+            </Screen>
 
             <NavigationBar
                 enableBackButton
@@ -224,8 +235,9 @@ const FieldUnderwriting = () => {
                     currentStep === 0 ? router.back() : prevStep()
                 }
                 onNextButtonPress={() => {
-                    currentFormik[currentStep].handleSubmit()
-                    if (currentStep === 1) router.push('/life/quoteSummary')
+                    //    currentFormik[currentStep].handleSubmit()
+                    healthFormik.handleSubmit()
+                    if (currentStep === 0) router.push('/life/quoteSummary')
                 }}
             />
         </SafeAreaView>

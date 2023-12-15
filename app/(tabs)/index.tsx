@@ -1,21 +1,21 @@
 import {
     StyleSheet,
     View,
-    FlatList,
     TouchableOpacity,
     SafeAreaView,
+    Dimensions,
 } from 'react-native'
 import React from 'react'
 
-import { AntDesign, Ionicons } from '@expo/vector-icons'
 import { Stack, router, useNavigation } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import NewProspect from '../components/NewProspect'
 import { Text } from '../../components/Themed'
 import DashboardItem from '../components/DashboardItem'
 import theme from '../../themes/theme'
 import FloatingButton from '../components/FloatingButton'
 import { ScrollView } from 'react-native-gesture-handler'
+import PieChartComponent from '../components/charts/PieChart'
+import { BarChart, LineChart } from 'react-native-chart-kit'
 
 const prospect = [
     { name: 'My Prospect', value: 2, id: 1, iconName: 'md-star-outline' },
@@ -25,9 +25,53 @@ const prospect = [
     { name: 'Collection', value: 2, id: 3, iconName: 'alert-circle-outline' },
     { name: 'Help Center', value: 2, id: 5, iconName: 'md-library-outline' },
 ]
-
+const myData = [
+    {
+        title: 'One',
+        value: 10,
+        color: '#E38627',
+    },
+    {
+        title: 'Two',
+        value: 15,
+        color: '#C13C37',
+    },
+    {
+        title: 'Three',
+        value: 20,
+        color: '#6A2135',
+    },
+]
 const StartingView = () => {
-    const navigation = useNavigation()
+    const data = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        datasets: [
+            {
+                data: [20, 45, 28, 80, 99, 43],
+                color: (opacity = 1) => `rgba(255, 65, 224, ${opacity})`, // optional
+                strokeWidth: 2, // optional
+            },
+        ],
+        legend: ['Rainy Days'], // optional
+    }
+    const screenWidth = Dimensions.get('window').width
+    const graphStyle = {
+        marginVertical: 8,
+        borderRadius: 16,
+    }
+    const chartConfig = {
+        backgroundColor: '#e26a00',
+        backgroundGradientFrom: '#fff',
+        backgroundGradientTo: '#fff',
+        backgroundGradientFromOpacity: 0,
+
+        backgroundGradientToOpacity: 0.5,
+        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+        strokeWidth: 2, // optional, default 3
+        barPercentage: 0.5,
+        useShadowColorFromDataset: false, // optional
+        avoidFalseZero: true,
+    }
     return (
         <SafeAreaView style={[styles.container]}>
             <View style={styles.container}>
@@ -35,19 +79,21 @@ const StartingView = () => {
                 <Stack.Screen
                     options={{
                         headerShown: true,
-                        headerTintColor: '#fff',
+                        headerTintColor: '#000',
                         headerTitleStyle: {
                             fontWeight: 'bold',
-                            fontFamily: 'OpenSans',
+                            fontFamily: 'OpenSans_700Bold',
                         },
 
                         headerTitle: 'Field Prospect',
-                        title: 'Fields',
+                        title: 'Dashboard',
                         headerStyle: {
-                            backgroundColor: '#00A3AD',
+                            //backgroundColor: '#fff',
+                            //backgroundColor: '#00A3AD',
+                            height: 120,
                         },
 
-                        headerRight: () => (
+                        headerLeft: () => (
                             <TouchableOpacity
                                 onPress={() => {
                                     router.push('/modal')
@@ -55,16 +101,26 @@ const StartingView = () => {
                             >
                                 <View
                                     style={{
-                                        flexDirection: 'row',
+                                        height: 40,
+                                        width: 40,
+                                        justifyContent: 'center',
                                         alignItems: 'center',
-                                        marginRight: 20,
+                                        marginLeft: 20,
+                                        borderColor: '#00A3AD',
+                                        borderWidth: 1,
+                                        borderRadius: 20,
+                                        backgroundColor: '#00A3AD',
                                     }}
                                 >
-                                    <AntDesign
-                                        name="plus"
-                                        size={30}
-                                        color="#fff"
-                                    />
+                                    <Text
+                                        style={{
+                                            fontFamily: 'OpenSans_700Bold',
+                                            fontSize: 20,
+                                            color: '#fff',
+                                        }}
+                                    >
+                                        JA
+                                    </Text>
                                 </View>
                             </TouchableOpacity>
                         ),
@@ -72,7 +128,7 @@ const StartingView = () => {
                 />
                 <ScrollView style={styles.scrollContent}>
                     <View style={styles.content}>
-                        <DashboardItem title="Outstanding Premiums" value="2">
+                        <DashboardItem title="Outstanding Premiums" value="12">
                             <View
                                 style={{
                                     flex: 1,
@@ -87,7 +143,7 @@ const StartingView = () => {
                                         color: '#00A3AD',
                                     }}
                                 >
-                                    9799.00 GHS
+                                    1979.00 GHS
                                 </Text>
                                 <Text style={{ fontSize: 14 }}>
                                     Outstanding Premiums to pay
@@ -96,7 +152,9 @@ const StartingView = () => {
                             <View style={{ height: 40, width: '100%' }}>
                                 <TouchableOpacity
                                     onPress={() => {
-                                        router.push('/moneycollection')
+                                        router.push(
+                                            '/(tabs)/payments/outstanding'
+                                        )
                                     }}
                                 >
                                     <View
@@ -127,38 +185,70 @@ const StartingView = () => {
                                                 padding: 10,
                                             }}
                                         >
-                                            34200.00 GHS
+                                            732.00 GHS
                                         </Text>
                                     </View>
                                 </TouchableOpacity>
                             </View>
                         </DashboardItem>
-                        <DashboardItem title="My Prospect" value="2" />
+                        <DashboardItem title="My Prospect" value="12">
+                            <View
+                                style={{
+                                    flex: 1,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        fontSize: 30,
+                                        fontFamily: 'OpenSans_700Bold',
+                                        color: '#00A3AD',
+                                    }}
+                                >
+                                    12
+                                </Text>
+                                <Text style={{ fontSize: 14 }}>
+                                    Prospects to follow up
+                                </Text>
+                            </View>
+                        </DashboardItem>
+                        <DashboardItem title="Performance matrix" value="12">
+                            <View
+                                style={{
+                                    flex: 1,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}
+                            >
+                                <PieChartComponent />
+                            </View>
+                        </DashboardItem>
+                        <DashboardItem title="Performance" value="12">
+                            <View
+                                style={{
+                                    flex: 1,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}
+                            ></View>
+                        </DashboardItem>
                     </View>
-                    {/*<View style={styles.footer}>
-                    <NewProspect
-                        onNewProspect={() => router.push('/life')}
-                        onMicroProspect={() => router.push('/micro')}
-                        onGroupLife={() => router.push('/grouplife')}
-                    />
-                </View>*/}
                 </ScrollView>
-                {/*<View style={{ flex: 1, backgroundColor: 'red', bottom: 0 }}>
-                    <FloatingButton
-                        onPress={() => {
-                            console.log('pressed')
-                        }}
-                    />
-                </View>*/}
+
                 <FloatingButton
-                    onGroupPress={() => {
+                    onGroupProspectPress={() => {
                         router.push('/grouplife')
                     }}
-                    onPress={() => {
-                        console.log('pressed')
+                    onNewProspect={() => {
+                        router.push('/life')
+                    }}
+                    onMicroProspectPress={() => {
+                        router.push('/micro')
                     }}
                 />
             </View>
+            <StatusBar style="dark" />
         </SafeAreaView>
     )
 }

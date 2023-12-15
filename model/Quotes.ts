@@ -23,7 +23,7 @@ export interface CustomerInfo {
     region: string
     country: string
     postalCodeOrDigitalAddress: string
-    //digitalAddress?: string // same as postal code
+
     dateOfBirth: Date | string
     occupation: string
 }

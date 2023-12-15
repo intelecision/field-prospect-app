@@ -10,6 +10,7 @@ import {
 import React, { FC } from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation, Stack, router } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
 
 type Props = {
     heading: string
@@ -28,7 +29,7 @@ const GroupScreen: FC<Props> = (props: Props) => {
                     headerStyle: {
                         backgroundColor: '#00A3AD',
                     },
-                    headerTintColor: 'black',
+
                     headerTitleStyle: {
                         fontFamily: 'OpenSans',
                     },
@@ -42,7 +43,7 @@ const GroupScreen: FC<Props> = (props: Props) => {
                                 <Ionicons
                                     name="close-outline"
                                     size={30}
-                                    color="#000"
+                                    color="#fff"
                                     style={{
                                         marginLeft: 15,
                                         opacity: pressed ? 0.5 : 1,
@@ -58,9 +59,14 @@ const GroupScreen: FC<Props> = (props: Props) => {
                 style={[
                     {
                         justifyContent: 'center',
-                        backgroundColor: '#00A3AD',
+                        //backgroundColor: '#00A3AD',
                         alignItems: 'center',
                         minHeight: 60,
+                        borderWidth: 1,
+                        //borderRadius: 10,
+                        borderColor: '#00A3AD',
+                        padding: 10,
+                        margin: 10,
                     },
                 ]}
             >
@@ -69,7 +75,7 @@ const GroupScreen: FC<Props> = (props: Props) => {
                         fontSize: 20,
                         //fontWeight: '700',
                         justifyContent: 'center',
-                        color: '#fff',
+                        color: '#00A3AD',
                     }}
                 >
                     {heading}
@@ -82,6 +88,7 @@ const GroupScreen: FC<Props> = (props: Props) => {
             >
                 <View style={styles.content}>{children}</View>
             </KeyboardAvoidingView>
+            <StatusBar style="light" />
         </View>
     )
 }
@@ -94,7 +101,7 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        padding: 20,
+        backgroundColor: '#fff',
     },
     scrollContent: {
         flex: 1,

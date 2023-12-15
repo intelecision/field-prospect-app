@@ -7,11 +7,15 @@ import {
     PersonalMonthlyExpenses,
     QuoteSummary,
 } from '../model/Quotes'
-import { LifeInsuranceProduct, MonthlySalary } from '../model/entities'
+import {
+    CustomerInformation,
+    LifeInsuranceProduct,
+    MonthlySalary,
+} from '../model/entities'
 
 type QuoteContextType = {
-    customerInfo: CustomerInfo
-    setCustomerInfo: (customerInfo: CustomerInfo) => void
+    customerInfo: CustomerInformation
+    setCustomerInfo: (customerInfo: postalCodeOrDigitalAddress) => void
     monthlySalary: MonthlySalary
     setMonthlyIncome: (monthlySalary: MonthlySalary) => void
     interestedProduct: LifeInsuranceProduct[]
@@ -46,9 +50,11 @@ export const initialContextState: QuoteContextType = {
         region: ' ',
         country: ' ',
         postalCodeOrDigitalAddress: ' ',
-
         dateOfBirth: new Date(),
         occupation: ' ',
+        ghanaCard: '',
+        weight: 0,
+        height: 0,
     },
     setCustomerInfo: () => {},
 

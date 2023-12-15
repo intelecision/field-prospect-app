@@ -1,13 +1,13 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import { globalStyles } from '../../Styles/GlobalStyles'
+import { globalStyles } from '../Styles/GlobalStyles'
 import { FormikProps, useFormik } from 'formik'
-import { Text, TextInput } from '../../../components/Themed'
+import { Text, TextInput } from '../../components/Themed'
 import * as Yup from 'yup'
-import { ClientInformation } from '../../../model/entities'
+import { CustomerInformation } from '../../model/entities'
 
 type Props = {
-    formik: FormikProps<ClientInformation>
+    formik: FormikProps<CustomerInformation>
 }
 
 const AddressSection = ({ formik }: Props) => {

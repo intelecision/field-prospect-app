@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Text } from '../../../../components/Themed'
 import { globalStyles } from '../../../Styles/GlobalStyles'
@@ -6,8 +6,6 @@ import Checkbox from 'expo-checkbox'
 import YesNoQuestionnaire from '../../../components/YesNoQuestionare'
 import { FormikProps } from 'formik'
 import { HealthQuestionnaire } from '../../../../model/entities'
-import { YesNoRadioGroupState } from '../../../components/YesNoRadioGroup'
-import { is } from 'date-fns/locale'
 import { useQuoteContextType } from '../../../../context/QuoteContext'
 
 type Props = {

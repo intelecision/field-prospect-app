@@ -1,6 +1,7 @@
 import {
     KeyboardAvoidingView,
     Platform,
+    ScrollView,
     StyleSheet,
     Text,
     View,
@@ -22,43 +23,56 @@ const GroupStepOne = () => {
                 style={{ flex: 1 }}
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
-                <View style={styles.content}>
-                    <View style={globalStyles.header_group}>
-                        <Text style={globalStyles.header_group_text}>
-                            CONTACT DETAILS
-                        </Text>
-                    </View>
-                    <View style={globalStyles.indentations}>
-                        <View style={globalStyles.editGroup}>
-                            <Text style={globalStyles.label}>
-                                Contact Full Name
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    style={{ flex: 1 }}
+                >
+                    <View style={styles.content}>
+                        <View style={globalStyles.header_group}>
+                            <Text style={globalStyles.header_group_text}>
+                                CONTACT DETAILS
                             </Text>
-                            <TextInput
-                                placeholder="Title"
-                                style={globalStyles.input}
-                            />
                         </View>
+                        <View style={globalStyles.indentations}>
+                            <View style={globalStyles.editGroup}>
+                                <Text style={globalStyles.label}>
+                                    Contact Full Name
+                                </Text>
+                                <TextInput
+                                    placeholder="Title"
+                                    style={globalStyles.input}
+                                />
+                            </View>
+                            <View style={globalStyles.editGroup}>
+                                <Text style={globalStyles.label}>
+                                    Position in the Group/Company
+                                </Text>
+                                <TextInput
+                                    placeholder="Position in group"
+                                    style={globalStyles.input}
+                                />
+                            </View>
 
-                        <View style={globalStyles.editGroup}>
-                            <Text style={globalStyles.label}>
-                                Contact Phone Number
-                            </Text>
-                            <TextInput
-                                placeholder="Title"
-                                style={globalStyles.input}
-                            />
+                            <View style={globalStyles.editGroup}>
+                                <Text style={globalStyles.label}>
+                                    Contact Phone Number
+                                </Text>
+                                <TextInput
+                                    placeholder="Title"
+                                    style={globalStyles.input}
+                                />
+                            </View>
+                            <View style={globalStyles.editGroup}>
+                                <Text style={globalStyles.label}>
+                                    Contact Email
+                                </Text>
+                                <TextInput
+                                    placeholder="Title"
+                                    style={globalStyles.input}
+                                />
+                            </View>
                         </View>
-                        <View style={globalStyles.editGroup}>
-                            <Text style={globalStyles.label}>
-                                Contact Email
-                            </Text>
-                            <TextInput
-                                placeholder="Title"
-                                style={globalStyles.input}
-                            />
-                        </View>
-                    </View>
-                    {/*<View style={globalStyles.editGroup}>
+                        {/*<View style={globalStyles.editGroup}>
                     <Text style={globalStyles.label}>Group Description</Text>
                     <TextInput placeholder="Title" style={globalStyles.input} />
                 </View>
@@ -70,14 +84,14 @@ const GroupStepOne = () => {
                     />
                 </View>*/}
 
-                    {/*<YesNoToggleCheckBox
+                        {/*<YesNoToggleCheckBox
                     labelYes="Yes"
                     labelNo="No"
                     state={undefined}
                     onPressYes={() => console.log('yes')}
                     onPressNo={() => console.log('no')}
                 />*/}
-                    {/*<View style={globalStyles.editGroup}>
+                        {/*<View style={globalStyles.editGroup}>
                     <Text style={globalStyles.label}>Group City</Text>
                     <TextInput placeholder="City" style={globalStyles.input} />
                 </View>
@@ -96,7 +110,8 @@ const GroupStepOne = () => {
                         style={globalStyles.input}
                     />
                 </View>*/}
-                </View>
+                    </View>
+                </ScrollView>
             </KeyboardAvoidingView>
         </View>
     )

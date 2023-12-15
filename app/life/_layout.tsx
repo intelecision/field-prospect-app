@@ -1,7 +1,4 @@
-import { Ionicons } from '@expo/vector-icons'
 import { Stack } from 'expo-router'
-import { useLayoutEffect } from 'react'
-import { Button } from 'react-native'
 
 export default function StackLayout() {
     return (
@@ -11,12 +8,14 @@ export default function StackLayout() {
                 headerTransparent: true,
                 headerBackVisible: false,
                 headerBackTitleVisible: false,
+                headerTintColor: '#fff',
                 headerStyle: {
                     //backgroundColor: '#00A3AD',
+                    backgroundColor: '#2c2c2c',
                 },
 
                 headerTitleStyle: {
-                    fontWeight: 'bold',
+                    fontFamily: 'OpenSans',
                 },
             }}
         >
@@ -24,6 +23,20 @@ export default function StackLayout() {
                 name="salePitch"
                 options={{
                     headerTitle: 'Ready to get started?',
+                    //headerShown: true,
+                }}
+            />
+            <Stack.Screen
+                name="lifeapplicationsteps"
+                options={{
+                    headerTitle: 'Welcome Life Insurance Application',
+                    //headerShown: true,
+                }}
+            />
+            <Stack.Screen
+                name="readytostart"
+                options={{
+                    headerTitle: 'Application Steps',
                     //headerShown: true,
                 }}
             />
@@ -38,7 +51,6 @@ export default function StackLayout() {
                 name="fieldunderwriting"
                 options={{
                     headerTitle: 'Pre-Underwriting',
-                    //headerShown: false,
                 }}
             />
             <Stack.Screen

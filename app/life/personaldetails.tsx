@@ -6,7 +6,7 @@ import {
     StyleSheet,
     View,
 } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import NavigationBar from '../../components/NavigationBar'
 import { router } from 'expo-router'
 import { globalStyles } from './../Styles/GlobalStyles'
@@ -14,7 +14,10 @@ import { TextInput, Text } from '../../components/Themed'
 import { AntDesign } from '@expo/vector-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { YesNoRadioGroup } from '../components/YesNoRadioGroup'
+import {
+    YesNoRadioGroup,
+    YesNoRadioGroupState,
+} from '../components/YesNoRadioGroup'
 import DateInput from '../components/DateInput'
 import {
     todayMinus18years,
@@ -23,10 +26,12 @@ import {
 import { useCustomerInfo } from '../../context/QuoteContext'
 import { CustomerInfo } from '../../model/Quotes'
 import Screen from './components/Screen'
+import { CustomerInformation } from '../../model/entities'
+import AddressSection from '../components/AddressSection'
 
 const PersonalDetails = () => {
     const { customerInfo, setCustomerInfo } = useCustomerInfo()
-
+    const [isMale, setIsMale] = useState<YesNoRadioGroupState>(undefined)
     const [dateOfBirth, setDateOfBirth] = React.useState<Date | string>(
         new Date('1960-01-01')
     )
@@ -45,9 +50,11 @@ const PersonalDetails = () => {
             address: '',
             city: '',
             region: '',
-            country: '',
             postalCodeOrDigitalAddress: '',
             occupation: '',
+            ghanaCard: '0000000000',
+            weight: 0,
+            height: 0,
         },
         validationSchema: Yup.object().shape({
             title: Yup.string()
@@ -81,7 +88,7 @@ const PersonalDetails = () => {
                 )
                 .required('Required field'),
         }),
-        onSubmit(values: CustomerInfo) {
+        onSubmit(values: CustomerInformation) {
             setCustomerInfo(values)
             router.push('/life/budgetwizardform')
         },
@@ -100,358 +107,252 @@ const PersonalDetails = () => {
                     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                     style={styles.container}
                 >
-                    <View
-                        style={[
-                            {
-                                justifyContent: 'center',
-                                backgroundColor: '#00A3AD',
-                                alignItems: 'center',
-                                height: 120,
-                            },
-                        ]}
-                    >
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}
-                        >
-                            <AntDesign name="contacts" size={30} color="#fff" />
-                            <Text
-                                style={{
-                                    fontSize: 20,
-                                    color: '#fff',
-                                    marginLeft: 10,
-                                }}
-                            >
-                                Customer Information
+                    <ScrollView style={styles.content}>
+                        <View style={globalStyles.header_group}>
+                            <Text style={globalStyles.header_group_text}>
+                                PERSONAL INFORMATION
                             </Text>
                         </View>
-                        <Text style={{ fontSize: 16, color: '#fff' }}>
-                            Ask the customer for the following information
-                        </Text>
-                        {/*<Progress currentStep={4} numberOfSteps={4} />*/}
-                    </View>
-                    <View style={styles.container}>
-                        <ScrollView style={styles.contentContainer}>
-                            <View style={styles.content}>
-                                <View style={globalStyles.editGroup}>
-                                    <Text style={globalStyles.label}>
-                                        Title
+                        <View style={styles.content}>
+                            <View style={globalStyles.editGroup}>
+                                <Text style={globalStyles.label}>Title</Text>
+                                <TextInput
+                                    style={
+                                        formik.errors.title
+                                            ? globalStyles.input_error
+                                            : globalStyles.input
+                                    }
+                                    placeholder="Title"
+                                    onChangeText={formik.handleChange('title')}
+                                    onBlur={formik.handleBlur('title')}
+                                    value={formik.values.title}
+                                />
+                                {formik.values.title && (
+                                    <Text style={globalStyles.error}>
+                                        {formik.errors.title}
                                     </Text>
-                                    <TextInput
-                                        style={
-                                            formik.errors.title
-                                                ? globalStyles.input_error
-                                                : globalStyles.input
-                                        }
-                                        placeholder="Title"
-                                        onChangeText={formik.handleChange(
-                                            'title'
-                                        )}
-                                        onBlur={formik.handleBlur('title')}
-                                        value={formik.values.title}
-                                    />
-                                    {formik.values.title && (
-                                        <Text style={globalStyles.error}>
-                                            {formik.errors.title}
-                                        </Text>
+                                )}
+                            </View>
+                            <View style={globalStyles.editGroup}>
+                                <Text style={globalStyles.label}>
+                                    First name
+                                </Text>
+                                <TextInput
+                                    style={
+                                        formik.errors.firstName
+                                            ? globalStyles.input_error
+                                            : globalStyles.input
+                                    }
+                                    placeholder="First name"
+                                    onChangeText={formik.handleChange(
+                                        'firstName'
                                     )}
-                                </View>
-                                <View style={globalStyles.editGroup}>
-                                    <Text style={globalStyles.label}>
-                                        First name
+                                    onBlur={formik.handleBlur('firstName')}
+                                    value={formik.values.firstName}
+                                />
+                                {formik.errors.firstName && (
+                                    <Text style={globalStyles.error}>
+                                        {formik.errors.firstName}
                                     </Text>
-                                    <TextInput
-                                        style={
-                                            formik.errors.firstName
-                                                ? globalStyles.input_error
-                                                : globalStyles.input
-                                        }
-                                        placeholder="First name"
-                                        onChangeText={formik.handleChange(
-                                            'firstName'
-                                        )}
-                                        onBlur={formik.handleBlur('firstName')}
-                                        value={formik.values.firstName}
-                                    />
-                                    {formik.errors.firstName && (
-                                        <Text style={globalStyles.error}>
-                                            {formik.errors.firstName}
-                                        </Text>
+                                )}
+                            </View>
+                            <View style={globalStyles.editGroup}>
+                                <Text style={globalStyles.label}>
+                                    Middle name
+                                </Text>
+                                <TextInput
+                                    style={
+                                        formik.errors.middleName
+                                            ? globalStyles.input_error
+                                            : globalStyles.input
+                                    }
+                                    placeholder="Middle name"
+                                    onChangeText={formik.handleChange(
+                                        'middleName'
                                     )}
-                                </View>
-                                <View style={globalStyles.editGroup}>
-                                    <Text style={globalStyles.label}>
-                                        Middle name
+                                    onBlur={formik.handleBlur('middleName')}
+                                    value={formik.values.middleName}
+                                />
+                                {formik.errors.middleName && (
+                                    <Text style={globalStyles.error}>
+                                        {formik.errors.middleName}
                                     </Text>
-                                    <TextInput
-                                        style={
-                                            formik.errors.middleName
-                                                ? globalStyles.input_error
-                                                : globalStyles.input
-                                        }
-                                        placeholder="Middle name"
-                                        onChangeText={formik.handleChange(
-                                            'middleName'
-                                        )}
-                                        onBlur={formik.handleBlur('middleName')}
-                                        value={formik.values.middleName}
-                                    />
-                                    {formik.errors.middleName && (
-                                        <Text style={globalStyles.error}>
-                                            {formik.errors.middleName}
-                                        </Text>
+                                )}
+                            </View>
+                            <View style={globalStyles.editGroup}>
+                                <Text style={globalStyles.label}>
+                                    Last name
+                                </Text>
+                                <TextInput
+                                    style={
+                                        formik.errors.lastName
+                                            ? globalStyles.input_error
+                                            : globalStyles.input
+                                    }
+                                    placeholder="Last name"
+                                    onChangeText={formik.handleChange(
+                                        'lastName'
                                     )}
-                                </View>
-                                <View style={globalStyles.editGroup}>
-                                    <Text style={globalStyles.label}>
-                                        Last name
+                                    onBlur={formik.handleBlur('lastName')}
+                                    value={formik.values.lastName}
+                                />
+                                {formik.errors.lastName && (
+                                    <Text style={globalStyles.error}>
+                                        {formik.errors.lastName}
                                     </Text>
-                                    <TextInput
-                                        style={
-                                            formik.errors.lastName
-                                                ? globalStyles.input_error
-                                                : globalStyles.input
-                                        }
-                                        placeholder="Last name"
-                                        onChangeText={formik.handleChange(
-                                            'lastName'
-                                        )}
-                                        onBlur={formik.handleBlur('lastName')}
-                                        value={formik.values.lastName}
-                                    />
-                                    {formik.errors.lastName && (
-                                        <Text style={globalStyles.error}>
-                                            {formik.errors.lastName}
-                                        </Text>
+                                )}
+                            </View>
+                            <View style={globalStyles.editGroup}>
+                                <Text style={globalStyles.label}>
+                                    Ghana Card No.
+                                </Text>
+                                <TextInput
+                                    style={
+                                        formik.errors.ghanaCard
+                                            ? globalStyles.input_error
+                                            : globalStyles.input
+                                    }
+                                    placeholder="Ghana Card Number"
+                                    onChangeText={formik.handleChange(
+                                        'ghanaCard'
                                     )}
-                                </View>
-                                <View style={globalStyles.editGroup}>
-                                    <Text style={globalStyles.label}>
-                                        Address
+                                    onBlur={formik.handleBlur('ghanaCard')}
+                                    value={formik.values.ghanaCard}
+                                />
+                                {formik.errors.ghanaCard && (
+                                    <Text style={globalStyles.error}>
+                                        {formik.errors.ghanaCard}
                                     </Text>
-                                    <TextInput
-                                        style={
-                                            formik.errors.address
-                                                ? globalStyles.input_error
-                                                : {
-                                                      ...globalStyles.input,
-                                                      height: Math.max(
-                                                          50,
-                                                          inputHeight
-                                                      ),
-                                                  }
-                                        }
-                                        multiline
-                                        placeholder="Address"
-                                        onChangeText={formik.handleChange(
-                                            'address'
-                                        )}
-                                        onBlur={formik.handleBlur('address')}
-                                        value={formik.values.address}
-                                        onContentSizeChange={(event) => {
-                                            setInputHeight(
-                                                event.nativeEvent.contentSize
-                                                    .height
+                                )}
+                            </View>
+                            <View style={globalStyles.editGroup}>
+                                <DateInput
+                                    dateOfBirth={
+                                        formik.values.dateOfBirth
+                                        //new Date()
+                                    }
+                                    setDateOfBirth={setDateOfBirth}
+                                    formik={formik}
+                                />
+                                {formik.errors.dateOfBirth && (
+                                    <Text style={[globalStyles.error]}>
+                                        {formik.errors.dateOfBirth}
+                                    </Text>
+                                )}
+                            </View>
+                            <View style={[globalStyles.editGroup]}>
+                                <Text style={globalStyles.label}>
+                                    Are you male or female?
+                                </Text>
+                                <View
+                                    style={{
+                                        marginHorizontal: 20,
+                                        width: '50%',
+                                    }}
+                                >
+                                    <YesNoRadioGroup
+                                        labelYes="Male"
+                                        labelNo="Female"
+                                        state={isMale}
+                                        isRow={true}
+                                        onPressYes={() => {
+                                            formik.setFieldValue('sex', 'Male')
+                                            setIsMale(true)
+                                        }}
+                                        onPressNo={function (): void {
+                                            formik.setFieldValue(
+                                                'sex',
+                                                'Female'
                                             )
-                                            //console.log(
-                                            //    event.nativeEvent.contentSize.height
-                                            //)
+                                            setIsMale(false)
                                         }}
                                     />
-                                    {formik.errors.address && (
-                                        <Text style={globalStyles.error}>
-                                            {formik.values.address}
-                                        </Text>
-                                    )}
                                 </View>
-                                <View style={globalStyles.editGroup}>
-                                    <Text style={globalStyles.label}>City</Text>
-                                    <TextInput
-                                        style={
-                                            formik.errors.city
-                                                ? globalStyles.input_error
-                                                : {
-                                                      ...globalStyles.input,
-                                                  }
-                                        }
-                                        placeholder="City"
-                                        onChangeText={formik.handleChange(
-                                            'city'
-                                        )}
-                                        onBlur={formik.handleBlur('city')}
-                                        value={formik.values.city}
-                                    />
-                                    {formik.errors.city && (
-                                        <Text style={globalStyles.error}>
-                                            {formik.values.city}
-                                        </Text>
-                                    )}
-                                </View>
-                                <View style={globalStyles.editGroup}>
-                                    <Text style={globalStyles.label}>
-                                        Region
+                                {formik.errors.sex && (
+                                    <Text style={globalStyles.error}>
+                                        {formik.errors.sex}
                                     </Text>
-                                    <TextInput
-                                        style={
-                                            formik.errors.region
-                                                ? globalStyles.input_error
-                                                : {
-                                                      ...globalStyles.input,
-                                                  }
-                                        }
-                                        placeholder="Region"
-                                        onChangeText={formik.handleChange(
-                                            'region'
-                                        )}
-                                        onBlur={formik.handleBlur('region')}
-                                        value={formik.values.region}
-                                    />
-                                    {formik.errors.region && (
-                                        <Text style={globalStyles.error}>
-                                            {formik.values.region}
-                                        </Text>
-                                    )}
-                                </View>
-                                <View style={globalStyles.editGroup}>
-                                    <Text style={globalStyles.label}>
-                                        Postal Code
-                                    </Text>
-                                    <TextInput
-                                        style={
-                                            formik.errors
-                                                .postalCodeOrDigitalAddress
-                                                ? globalStyles.input_error
-                                                : {
-                                                      ...globalStyles.input,
-                                                  }
-                                        }
-                                        placeholder="postal Code Or DigitalAddress"
-                                        onChangeText={formik.handleChange(
-                                            'postalCodeOrDigitalAddress'
-                                        )}
-                                        onBlur={formik.handleBlur(
-                                            'postalCodeOrDigitalAddress'
-                                        )}
-                                        value={
-                                            formik.values
-                                                .postalCodeOrDigitalAddress
-                                        }
-                                    />
-                                    {formik.errors
-                                        .postalCodeOrDigitalAddress && (
-                                        <Text style={globalStyles.error}>
-                                            {
-                                                formik.values
-                                                    .postalCodeOrDigitalAddress
-                                            }
-                                        </Text>
-                                    )}
-                                </View>
-                                <View style={globalStyles.editGroup}>
-                                    <DateInput
-                                        dateOfBirth={dateOfBirth}
-                                        setDateOfBirth={setDateOfBirth}
-                                        formik={formik}
-                                    />
-                                    {formik.errors.dateOfBirth && (
-                                        <Text style={[globalStyles.error]}>
-                                            {formik.errors.dateOfBirth}
-                                        </Text>
-                                    )}
-                                </View>
-                                <View style={[globalStyles.editGroup]}>
-                                    <Text style={globalStyles.label}>
-                                        Are you male or female?
-                                    </Text>
-                                    <View style={{ marginHorizontal: 20 }}>
-                                        <YesNoRadioGroup
-                                            labelYes="Male"
-                                            labelNo="Female"
-                                            state={true}
-                                            isRow={false}
-                                            onPressYes={() => {
-                                                formik.setFieldValue(
-                                                    'sex',
-                                                    'Female'
-                                                )
-                                            }}
-                                            onPressNo={function (): void {
-                                                formik.setFieldValue(
-                                                    'sex',
-                                                    'Male'
-                                                )
-                                            }}
-                                        />
-                                    </View>
-                                    {formik.errors.sex && (
-                                        <Text style={globalStyles.error}>
-                                            {formik.errors.sex}
-                                        </Text>
-                                    )}
-                                </View>
-
-                                <View style={globalStyles.editGroup}>
-                                    <Text style={globalStyles.label}>
-                                        Email
-                                    </Text>
-                                    <TextInput
-                                        style={
-                                            formik.errors.email
-                                                ? globalStyles.input_error
-                                                : globalStyles.input
-                                        }
-                                        placeholder="Email address"
-                                        keyboardType="email-address"
-                                        onChangeText={formik.handleChange(
-                                            'email'
-                                        )}
-                                        onBlur={formik.handleBlur('email')}
-                                        value={formik.values.email}
-                                    />
-                                    {formik.errors.email && (
-                                        <Text style={globalStyles.error}>
-                                            {formik.errors.email}
-                                        </Text>
-                                    )}
-                                </View>
-                                <View style={globalStyles.editGroup}>
-                                    <Text style={globalStyles.label}>
-                                        Contact phone
-                                    </Text>
-                                    <TextInput
-                                        style={
-                                            formik.errors.contactPhone
-                                                ? globalStyles.input_error
-                                                : globalStyles.input
-                                        }
-                                        placeholder="Contact phone"
-                                        keyboardType="phone-pad"
-                                        onChangeText={formik.handleChange(
-                                            'contactPhone'
-                                        )}
-                                        onBlur={formik.handleBlur(
-                                            'contactPhone'
-                                        )}
-                                        value={formik.values.contactPhone}
-                                    />
-                                    {formik.errors.contactPhone && (
-                                        <Text style={globalStyles.error}>
-                                            {formik.values.contactPhone}
-                                        </Text>
-                                    )}
-                                </View>
+                                )}
                             </View>
-                        </ScrollView>
+                            <View style={globalStyles.editGroup}>
+                                <Text style={globalStyles.label}>
+                                    Weight (kg)
+                                </Text>
+                                <TextInput
+                                    placeholder="0"
+                                    style={
+                                        formik.errors.weight // use formik object here
+                                            ? globalStyles.input_error
+                                            : globalStyles.input
+                                    }
+                                    keyboardType="numbers-and-punctuation"
+                                    value={String(formik.values.weight)}
+                                    onBlur={formik.handleBlur('weight')}
+                                    onChangeText={formik.handleChange('weight')}
+                                />
+                                {formik.errors.weight && (
+                                    <Text style={globalStyles.error}>
+                                        {formik.errors.weight}
+                                    </Text>
+                                )}
+                            </View>
+                            <View style={globalStyles.editGroup}>
+                                <Text style={globalStyles.label}>
+                                    Height (cm)
+                                </Text>
+                                <TextInput
+                                    placeholder="0"
+                                    style={
+                                        formik.errors.height // use formik object here
+                                            ? globalStyles.input_error
+                                            : globalStyles.input
+                                    }
+                                    keyboardType="numbers-and-punctuation"
+                                    value={String(formik.values.height)}
+                                    onBlur={formik.handleBlur('height')}
+                                    onChangeText={formik.handleChange('height')}
+                                />
+                                {formik.errors.height && (
+                                    <Text style={globalStyles.error}>
+                                        {formik.errors.height}
+                                    </Text>
+                                )}
+                            </View>
+                            <View style={globalStyles.editGroup}>
+                                <Text style={globalStyles.label}>
+                                    What type do you do
+                                </Text>
+                                <TextInput
+                                    placeholder=" Field Engineer"
+                                    style={
+                                        formik.errors.occupation // use formik object here
+                                            ? globalStyles.input_error
+                                            : globalStyles.input
+                                    }
+                                    value={formik.values.occupation}
+                                    onBlur={formik.handleBlur('occupation')}
+                                    onChangeText={formik.handleChange(
+                                        'occupation'
+                                    )}
+                                />
+
+                                {formik.errors.occupation && (
+                                    <Text style={globalStyles.error}>
+                                        {formik.errors.occupation}
+                                    </Text>
+                                )}
+                            </View>
+                            <AddressSection formik={formik} />
+                        </View>
+                    </ScrollView>
+                    <View style={styles.footer}>
                         <NavigationBar
                             enableBackButton
-                            enableNextButton
-                            onNextButtonPress={() => {
-                                formik.handleSubmit()
-                            }}
+                            enableNextButton={true}
                             onBackButtonPress={() => router.back()}
+                            onNextButtonPress={() => {
+                                router.push('/life/budgetwizardform')
+                            }}
                         />
                     </View>
                 </KeyboardAvoidingView>
@@ -470,7 +371,7 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        paddingHorizontal: 20,
+        //paddingHorizontal: 20,
     },
     contentContainer: {
         flex: 1,
@@ -505,5 +406,13 @@ const styles = StyleSheet.create({
         fontFamily: 'OpenSans',
         fontSize: 16,
         marginBottom: 10,
+    },
+    footer: {
+        width: '100%',
+
+        height: 110,
+        paddingTop: 20,
+        position: 'relative',
+        bottom: 0,
     },
 })

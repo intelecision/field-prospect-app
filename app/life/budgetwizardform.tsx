@@ -44,7 +44,9 @@ import LifeInsuranceChoices from './lifeInsurancechoices'
 import { Question } from '../data/questionaire'
 import PersonAssets from './components/PersonAssests'
 import PersonalObligations from './components/PersonalObligations'
-import { is } from 'date-fns/locale'
+import { de, is } from 'date-fns/locale'
+import HealthStatus from './components/Underwriting/HealthStatus'
+import { useState } from 'react'
 
 const Steps = [
     { name: 'Accommodation Expenses', component: AccommodationExpenses },
@@ -319,6 +321,42 @@ const BudgetWizardForm = () => {
             console.log('obligationFormik', values)
         },
     })
+    //const [isSubmitted, setSubmitted] = React.useState(false)
+    //const healthFormik = useFormik({
+    //    initialValues: {
+    //        isCancerPatient: false,
+    //        isAbleToBath: false,
+    //        isAbleToDress: false,
+    //        isAbleToEat: false,
+    //        isAbleTogoToilet: false,
+    //        isContinence: false,
+    //        isAbleToTransfer: false,
+    //        isCognitiveImpaired: false,
+    //        hasLouGehrigDisease: false,
+    //        onDialysis: false,
+    //    },
+    //    validationSchema: Yup.object({
+    //        isCancerPatient: Yup.string().required(
+    //            'Please ask if he/she has ever had cancer'
+    //        ),
+    //        isAbleToBath: Yup.boolean(),
+    //        isAbleToDress: Yup.boolean(),
+    //        isAbleToEat: Yup.boolean(),
+    //        isAbleToToilet: Yup.boolean(),
+    //        isContinence: Yup.boolean(),
+    //        isAbleToTransfer: Yup.boolean(),
+    //        isCognitiveImpaired: Yup.boolean(),
+    //        hasLouGehrigDisease: Yup.boolean(),
+    //        onDialysis: Yup.boolean(),
+    //    }),
+    //    onSubmit: (values: HealthQuestionnaire) => {
+    //        //    console.log('values', values)
+    //        healthFormik.setSubmitting(false)
+    //        setSubmitted(true)
+    //        setHealthQuestionnaire(values)
+    //        //    router.push('../life/productsSelected')
+    //    },
+    //})
 
     const submitInterestProduct = () => {
         let policies: LifeInsuranceProduct[] = []
@@ -449,8 +487,12 @@ const BudgetWizardForm = () => {
                     />
                 )
             }
-
-            //    default:
+            //case 11: {
+            //    return <HealthStatus formik={healthFormik} />
+            //}
+            default: {
+                return <Text>Wizard has ended</Text>
+            }
         }
     }
 
@@ -540,3 +582,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
 })
+function setHealthQuestionnaire(values: HealthQuestionnaire) {
+    throw new Error('Function not implemented.')
+}

@@ -59,7 +59,7 @@ const CompletedApplication = (props: Props) => {
                 <Button
                     title="Send to Office"
                     onPress={() => {
-                        router.push('/(drawer)/(tabs)/home/')
+                        router.push('/(tabs)')
                     }}
                 />
             </View>

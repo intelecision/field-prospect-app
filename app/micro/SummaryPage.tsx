@@ -23,7 +23,7 @@ const SummaryPage = ({ sumAssured }: Props) => {
                     </Text>
                     <Text style={styles.text}>
                         Sum assured:{' '}
-                        <Text style={{ fontFamily: 'OpenSanso_700Bold' }}>
+                        <Text style={{ fontFamily: 'OpenSans_700Bold' }}>
                             {sumAssured.toLocaleString('GHS', {
                                 style: 'currency',
                                 currency: 'GHS',

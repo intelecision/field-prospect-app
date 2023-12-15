@@ -9,6 +9,7 @@ import Screen from './components/Screen'
 import { globalStyles } from '../Styles/GlobalStyles'
 import { useQuoteContextType } from '../../context/QuoteContext'
 import { router } from 'expo-router'
+import NavigationBar from '../../components/NavigationBar'
 
 const QuoteSummaryPage = () => {
     const { quoteSummary } = useQuoteContextType()
@@ -65,10 +66,13 @@ const QuoteSummaryPage = () => {
                         )}
                     </View>
                 </View>
+
                 <View style={styles.footer}>
-                    <Button
-                        title="Continue"
-                        onPress={() => {
+                    <NavigationBar
+                        enableBackButton
+                        enableNextButton
+                        onBackButtonPress={() => router.back()}
+                        onNextButtonPress={() => {
                             router.push('/life/applicationForm')
                         }}
                     />
@@ -105,5 +109,6 @@ const styles = StyleSheet.create({
         height: 130,
         backgroundColor: '#fff',
         padding: 20,
+        position: 'relative',
     },
 })

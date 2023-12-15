@@ -9,6 +9,7 @@ import {
 import React from 'react'
 import { Stack } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
+import { StatusBar } from 'expo-status-bar'
 
 type Props = {
     heading: string
@@ -23,10 +24,7 @@ const MicroScreen = ({ heading, children, onCancel: handleCancel }: Props) => {
                 <Stack.Screen
                     options={{
                         title: 'Micro Insurance',
-                        headerStyle: {
-                            backgroundColor: '#ffffff',
-                        },
-                        headerTintColor: 'black',
+
                         headerTitleStyle: {
                             fontWeight: 'bold',
                         },
@@ -38,7 +36,7 @@ const MicroScreen = ({ heading, children, onCancel: handleCancel }: Props) => {
                             <Ionicons
                                 name="close-outline"
                                 size={32}
-                                color="black"
+                                color="white"
                                 style={{ marginRight: 20 }}
                                 onPress={handleCancel}
                             />
@@ -75,6 +73,7 @@ const MicroScreen = ({ heading, children, onCancel: handleCancel }: Props) => {
                     <View style={styles.content}>{children}</View>
                 </KeyboardAvoidingView>
             </View>
+            <StatusBar style="light" />
         </SafeAreaView>
     )
 }

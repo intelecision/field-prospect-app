@@ -13,8 +13,8 @@ import React, { useCallback } from 'react'
 import { Entypo, MaterialIcons } from '@expo/vector-icons'
 
 import { router } from 'expo-router'
-import { colors } from '../../../../../constants/Colors'
-import SearchHeader from '../../../../components/SearchHeader'
+import { colors } from '../../../../constants/Colors'
+import SearchHeader from '../../../components/SearchHeader'
 
 type Props = {
     children: React.ReactNode
@@ -88,7 +88,7 @@ const HelpScreen = (props: Props) => {
                 <TouchableOpacity
                     style={{}}
                     onPress={() => {
-                        router.push('/help/knowladgeBase')
+                        router.push('/(tabs)/more/help/knowledgeBase')
                     }}
                 >
                     <View
@@ -107,20 +107,39 @@ const HelpScreen = (props: Props) => {
                         <Text style={{}}>Knowledge Base</Text>
                     </View>
                 </TouchableOpacity>
-                <View
-                    style={{ justifyContent: 'center', alignItems: 'center' }}
+                <TouchableOpacity
+                    style={{}}
+                    onPress={() => {
+                        router.push('/(tabs)/more/help/tickets')
+                    }}
                 >
-                    <View style={styles.button}>
-                        <Entypo
-                            name="ticket"
-                            size={24}
-                            color={colors.primary}
-                        />
+                    <View
+                        style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <View style={styles.button}>
+                            <Entypo
+                                name="ticket"
+                                size={24}
+                                color={colors.primary}
+                            />
+                        </View>
+                        <Text style={{}}>Ticket</Text>
                     </View>
-                    <Text style={{}}>Ticket</Text>
-                </View>
-                <View style={styles.content}>{children}</View>
+                </TouchableOpacity>
             </View>
+            <View
+                style={{
+                    height: 1,
+                    backgroundColor: '#e0e0e0',
+                    marginHorizontal: 20,
+                    marginVertical: 10,
+                }}
+            />
+
+            <View style={styles.content}>{children}</View>
         </SafeAreaView>
     )
 }
@@ -133,7 +152,7 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        padding: 20,
+        //padding: 20,
     },
     searchItem: {
         borderRadius: 6,
