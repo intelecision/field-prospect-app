@@ -45,7 +45,7 @@ const data = [
 const widthAndHeight = 200
 const series = [123, 321, 123, 789, 537]
 const sliceColor = ['#fbd203', '#ffb300', '#ff9100', '#ff6c00', '#ff3c00']
-const agents = ['You', 'Agent 1', 'Agent 2', 'Agent 3', 'agent 4']
+const agents = ['You', 'Kwame', 'Kofi', 'Akua', 'Felicia']
 
 const PieChartComponent = (props: Props) => {
     const chartConfig = {
@@ -64,6 +64,7 @@ const PieChartComponent = (props: Props) => {
     return (
         <View
             style={{
+                flexDirection: 'row',
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -82,14 +83,14 @@ const PieChartComponent = (props: Props) => {
                 series={series}
                 sliceColor={sliceColor}
             />*/}
-            <View style={{ flexDirection: 'row', marginTop: 14 }}>
+            <View style={{ marginTop: 14, marginLeft: 20 }}>
                 {sliceColor.map((color, index) => (
                     <View
                         key={index}
                         style={{
                             flexDirection: 'row',
                             alignItems: 'center',
-                            justifyContent: 'center',
+                            //justifyContent: 'center',
                             marginBottom: 10,
                         }}
                     >
@@ -104,14 +105,6 @@ const PieChartComponent = (props: Props) => {
                         <Text>{agents[index]}</Text>
                     </View>
                 ))}
-
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}
-                ></View>
             </View>
         </View>
     )

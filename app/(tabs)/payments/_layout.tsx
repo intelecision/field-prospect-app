@@ -5,15 +5,15 @@ import { TabRouter } from '@react-navigation/native'
 
 const PaymentLayout = () => {
     return (
-        <Stack screenOptions={{ headerShown: false }}>
+        <Stack screenOptions={{ headerShown: false, headerBackTitle: 'Back' }}>
             <Stack.Screen
                 name="index"
                 options={{ headerShown: true, title: 'Payments' }}
             />
-            {/*<Stack.Screen
-                name="newPayment"
-                options={{ headerShown: true, title: 'New Payment' }}
-            />*/}
+            <Stack.Screen
+                name="[history]"
+                options={{ headerShown: true, title: 'Payment History' }}
+            />
             <Stack.Screen
                 name="outstanding"
                 options={{
@@ -24,7 +24,15 @@ const PaymentLayout = () => {
                 }}
             />
             <Stack.Screen
+                name="paymentMethods"
+                options={{ headerShown: true, title: 'Payment Methods XX' }}
+            />
+            <Stack.Screen
                 name="collections"
+                options={{ headerShown: true, title: 'Payments' }}
+            />
+            <Stack.Screen
+                name="takePayment"
                 options={{ headerShown: true, title: 'Payments' }}
             />
         </Stack>

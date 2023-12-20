@@ -6,9 +6,9 @@ import {
     router,
     useNavigation,
 } from 'expo-router'
-import { globalStyles } from '../Styles/GlobalStyles'
-import Button from '../../components/Button'
-import { TextInput, Text } from '../../components/Themed'
+import { globalStyles } from '../../Styles/GlobalStyles'
+import Button from '../../../components/Button'
+import { TextInput, Text } from '../../../components/Themed'
 
 type Props = {}
 
@@ -122,6 +122,14 @@ const styles = StyleSheet.create({
     },
     image: {
         width: 100,
-        height: 200,
+        height: 100,
+        resizeMode: 'contain',
+        padding: 10,
+    },
+    paymentMethod: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 10,
+        justifyContent: 'space-around',
     },
 })

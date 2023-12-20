@@ -1,8 +1,14 @@
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native'
+import {
+    FlatList,
+    Linking,
+    StyleSheet,
+    TouchableOpacity,
+    View,
+} from 'react-native'
 import React from 'react'
 import { Text } from '../../../components/Themed'
-import { Stack } from 'expo-router'
-import { Ionicons } from '@expo/vector-icons'
+import { Link, Stack } from 'expo-router'
+import { Feather, Ionicons, MaterialIcons } from '@expo/vector-icons'
 import Button from '../../../components/Button'
 
 const collections = [
@@ -92,13 +98,12 @@ const PaymentHome = () => {
         }
     }
     const handleSelectedItem = (item: any) => {
-        console.log('Item', item)
         if (item.id === selectedItem?.id) {
             setSelectedItem(null)
         } else {
             setSelectedItem(item)
         }
-        console.log('After', selectedItem)
+        console.log(selectedItem)
     }
     const getStatusText = (status: string) => {
         switch (status) {
@@ -111,6 +116,66 @@ const PaymentHome = () => {
             default:
                 return 'Paid'
         }
+    }
+
+    const sendReminder = (item: any) => {
+        //const url = `sms:${item.mobileNumber}`
+        //Linking.openURL(url)
+        const PHONE_NUMBER = '+233242331674'
+
+        Linking.openURL(`http://api.whatsapp.com/send?phone=${PHONE_NUMBER}`)
+    }
+    const selectedView = (item: any) => {
+        const url = `/(tabs)/payments/${item.name}/`
+        return (
+            <View
+                style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: 20,
+                    backgroundColor: '#fff',
+                }}
+            >
+                <Link href="/(tabs)/payments/paymentMethods">
+                    <View
+                        style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <MaterialIcons
+                            name="payment"
+                            size={30}
+                            color="orange"
+                        />
+                        <Text>Take payment</Text>
+                    </View>
+                </Link>
+                <TouchableOpacity onPress={() => sendReminder(item)}>
+                    <View
+                        style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Feather name="message-square" size={30} color="red" />
+                        <Text>Send reminder</Text>
+                    </View>
+                </TouchableOpacity>
+                <Link push href={url}>
+                    <View
+                        style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <MaterialIcons name="history" size={30} color="green" />
+                        <Text>History</Text>
+                    </View>
+                </Link>
+            </View>
+        )
     }
     return (
         <View style={styles.container}>
@@ -148,7 +213,12 @@ const PaymentHome = () => {
                 }}
             />
             <View style={styles.container}>
-                <View style={styles.content}>
+                <View
+                    style={[
+                        styles.content,
+                        { backgroundColor: selectedItem ? '#f8f8f8' : 'white' },
+                    ]}
+                >
                     <FlatList
                         data={collections}
                         extraData={selectedItem}
@@ -230,29 +300,7 @@ const PaymentHome = () => {
                                     </View>
                                 </TouchableOpacity>
                                 {selectedItem?.id === item.id &&
-                                    item.status !== 'paid' && (
-                                        <View
-                                            style={{
-                                                //flexDirection: 'row',
-                                                //width: '80%',
-                                                justifyContent: 'space-between',
-                                                //alignItems: 'center',
-                                            }}
-                                        >
-                                            <Button
-                                                title="Request Payment"
-                                                onPress={() => {
-                                                    console.log('Pay')
-                                                }}
-                                            />
-                                            {/*<Button
-                                                title="send remider"
-                                                onPress={() => {
-                                                    console.log('Pay')
-                                                }}
-                                            />*/}
-                                        </View>
-                                    )}
+                                    selectedView(item)}
                             </View>
                         )}
                         keyExtractor={(item) => item.id.toString()}
@@ -272,6 +320,7 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         padding: 20,
+        backgroundColor: '#fff',
     },
     sphere: {
         minWidth: 50,

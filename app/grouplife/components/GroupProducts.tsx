@@ -29,17 +29,9 @@ const GroupLife = [
         updated_at: '2021-08-10T14:54:04.000000Z',
         selected: false,
         question:
-            'if the group expects to incur funeral and burial expenses when a memberof the group dies?',
+            'Does the group expects to incur funeral and burial expenses when a memberof the group dies?',
     },
-    {
-        id: 3,
-        name: 'Health insurance',
-        description: 'Health insurance',
-        created_at: null,
-        updated_at: null,
-        selected: false,
-        question: 'Is your Group registered in this?',
-    },
+
     {
         id: 4,
         name: 'Group term life insurance',
@@ -47,7 +39,7 @@ const GroupLife = [
         created_at: null,
         updated_at: null,
         selected: false,
-        question: 'Is your Group registered in this?',
+        question: 'Does your Group need Group this?',
     },
     {
         id: 5,
@@ -56,7 +48,7 @@ const GroupLife = [
         created_at: null,
         updated_at: null,
         selected: false,
-        question: 'Is your Group registered in this?',
+        question: 'Does your Group need Group this?',
     },
     {
         id: 6,
@@ -65,7 +57,7 @@ const GroupLife = [
         created_at: null,
         updated_at: null,
         selected: false,
-        question: 'Is your Group registered in this?',
+        question: 'Does your Group need Group this?',
     },
 ]
 const GroupProducts = (props: Props) => {
